@@ -1,4 +1,4 @@
-# RetailPulse — Strategic Revenue Analytics & Time-Series Forecasting
+# RetailPulse - Strategic Revenue Analytics & Time-Series Forecasting
 
 **Gamma GLM | SARIMAX | Statistical Modeling | Revenue Analytics | Python & R**
 
