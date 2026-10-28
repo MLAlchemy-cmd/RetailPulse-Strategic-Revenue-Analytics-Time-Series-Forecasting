@@ -1,156 +1,177 @@
-**A Time Series Regression Approach to Promotion Optimization **
+# RetailPulse — Strategic Revenue Analytics & Time-Series Forecasting
 
+**Gamma GLM | SARIMAX | Statistical Modeling | Revenue Analytics | Python & R**
 
-📌 Overview
+## 📌 Overview
 
-This project analyzes daily revenue patterns for a UK-based online retail company using statistical regression and time-series forecasting techniques.
-The study aims to:
+This project analyzes daily revenue patterns from the **UCI Online Retail dataset**, containing approximately **541,909 transactions**, using statistical regression and time-series forecasting.
 
-Quantify the impact of promotions on revenue
+The objective is to understand revenue variability, identify seasonal purchasing patterns, and evaluate forecasting methods that can support retail planning and decision-making.
 
-Measure weekday vs. weekend purchasing behavior
+**Key objectives:**
+- Analyze weekday, weekend, and seasonal revenue patterns.
+- Investigate associations between high-revenue days and sales performance.
+- Build an interpretable **Gamma Generalized Linear Model (GLM)**.
+- Develop and evaluate a **SARIMAX model** for a 90-day forecasting horizon.
 
-Build a 90-day SARIMAX forecasting model with exogenous variables
+<img width="728" height="773" alt="Retail revenue analytical framework" src="https://github.com/user-attachments/assets/a3a1b240-8080-4497-bef8-d8deed555b51" />
 
-The analysis is built using R, leveraging GLM, SARIMAX, and standard forecasting tools.
-<img width="728" height="773" alt="image" src="https://github.com/user-attachments/assets/a3a1b240-8080-4497-bef8-d8deed555b51" />
+## 🧠 Key Insights
 
+### 1. Revenue Spike Analysis
 
-**🧠 Key Insights**
+The Gamma GLM reported approximately **105% higher revenue on identified high-revenue days**, with statistical significance (p < 0.001).
 
-🔹 1. Promotion Impact
+These days were identified using revenue-derived indicators rather than actual promotion records. Therefore, the result is descriptive and does not establish a causal marketing effect.
 
-Promotions increase revenue by ~105% (Gamma GLM)
+### 2. Weekend Revenue Patterns
 
-SARIMAX estimates ~35k GBP additional revenue during promotional periods
+The regression estimated approximately **50% lower daily revenue on weekends**, holding the included model variables constant.
 
-Effects are statistically significant (p < 0.01)
+This suggests meaningful differences between weekday and weekend purchasing activity.
 
-🔹 2. Weekend Effect
+### 3. Seasonal Trends
 
-Revenue drops ~50% on weekends
+The analysis identified:
+- A recurring **7-day seasonal pattern**.
+- Higher revenue activity during parts of Q4.
+- Variation in purchasing activity across months.
 
-Indicates B2B purchasing pattern (high weekday activity)
+### 4. Forecasting Performance
 
-🔹 3. Seasonal Patterns
+| Metric | Reported Result |
+|---|---:|
+| Test RMSE | £21,619 |
+| Test MAE | £13,914 |
+| Forecast evaluation horizon | 90 days |
 
-Strong weekly seasonality (7-day cycle)
+The SARIMAX model captured broad revenue patterns but showed greater prediction errors during unusually high-revenue periods.
 
-Higher volumes during Q4 (Oct–Dec)
+## 🛠️ Methodology
 
-Summer dip around July–August
+### 1. Data Preparation & Feature Engineering
 
-🔹 4. Forecasting Performance
+The Python preprocessing pipeline:
+- Filters the dataset to UK transactions.
+- Removes invalid quantities and prices.
+- Computes transaction revenue.
+- Aggregates transactions into daily observations.
+- Creates calendar-based features.
+- Identifies high-revenue days for exploratory analysis.
 
-Test RMSE: 21,619
+### 2. Gamma Generalized Linear Model
 
-Test MAE: 13,914
+A **Gamma GLM with a log-link function** was used to analyze daily revenue.
 
-Moderate accuracy (maps well to weekly patterns, struggles on extreme spikes)
+**Predictors:**
+- High-revenue-day indicator (`is_promotion` in the original code)
+- Weekend indicator
+- Month (categorical)
 
-🛠️ Methods & Models Used
-1️⃣ Gamma Generalized Linear Model (GLM)
+The model was used to estimate statistical associations between these variables and revenue.
 
-Used for explaining drivers of revenue
+### 3. SARIMAX Time-Series Forecasting
 
-Distribution: Gamma
+The forecasting workflow incorporated:
+- **ARIMA(1,0,2)** nonseasonal order.
+- Weekly seasonal frequency of 7.
+- Exogenous variables for weekend and high-revenue-day indicators.
+- Forecast evaluation over a 90-day holdout.
 
-Link function: Log
+**Diagnostics included:**
+- Augmented Dickey-Fuller (ADF) test
+- KPSS stationarity test
+- ACF and PACF analysis
+- Ljung–Box residual autocorrelation test
+- RMSE and MAE evaluation
 
-Predictors:
+## 📈 Results & Visualizations
 
-is_promotion
+### Revenue Patterns and Exploratory Analysis
 
-is_weekend
+<img width="899" height="599" alt="Retail revenue analysis visualization" src="https://github.com/user-attachments/assets/05f95b5d-bc93-4e1b-bb16-9ddaeddf0c39" />
 
-month (categorical)
+### Regression and Time-Series Analysis
 
-2️⃣ SARIMAX Time Series Model
+<img width="1155" height="676" alt="Regression and time-series analysis result" src="https://github.com/user-attachments/assets/48151ee5-86b3-44c9-b2ff-d46c5eb2dbfd" />
 
-Used for forecasting future revenue
+<img width="1182" height="796" alt="Statistical modeling and forecasting visualization" src="https://github.com/user-attachments/assets/b7198811-f7dd-4241-a6e1-99547cbbede5" />
 
-Auto ARIMA selected: ARIMA(1,0,2)
+### Additional Model Diagnostics
 
-Seasonal frequency: 7
+<img width="636" height="406" alt="Time-series diagnostic visualization" src="https://github.com/user-attachments/assets/4aeea625-ebde-44c6-b648-05ed9d19921c" />
 
-Exogenous regressors: promotion, weekend
+<img width="638" height="369" alt="Forecasting model diagnostic visualization" src="https://github.com/user-attachments/assets/de56713e-0cc8-43ee-9159-3c3caa336ac7" />
 
-Diagnostics included ACF, PACF, Ljung-Box test
+## 💼 Business Applications
 
-3️⃣ Stationarity Tests
+The project demonstrates how statistical modeling and forecasting can support:
 
-ADF Test: Non-stationary
+- **Revenue planning:** Understanding recurring patterns in sales activity.
+- **Operational planning:** Identifying periods with higher and lower demand.
+- **Forecast evaluation:** Quantifying predictive uncertainty and model limitations.
+- **Marketing experimentation:** Motivating future A/B tests using actual campaign records.
+- **Inventory management:** Incorporating seasonal demand patterns into planning.
 
-KPSS Test: Rejects stationarity
-→ Seasonal differencing required for forecasting
+These are potential applications rather than verified financial improvements.
 
-4️⃣ Evaluation Metrics
+## ⚙️ Technologies
 
-RMSE
+| Category | Tools |
+|---|---|
+| Programming | Python, R |
+| Data Processing | Pandas, NumPy, dplyr |
+| Statistical Modeling | Gamma GLM, Regression |
+| Forecasting | SARIMAX, forecast |
+| Diagnostics | ADF, KPSS, ACF, PACF, Ljung–Box |
+| Visualization | Matplotlib, ggplot2 |
+| Development | Jupyter Notebook, RStudio |
 
-MAE
-
-MAPE
-
-AIC / AICc
-
-📈 Findings (Summary)
-
-Promotions significantly boost revenue (up to 2x uplift).
-
-Weekends consistently underperform (approx 50% drop).
-
-Revenue is highly seasonal with clear weekly patterns.
-
-SARIMAX is useful for planning but not perfect for extreme spikes.
-
-Combining GLM (interpretability) and SARIMAX (forecasting) gives the best full-picture view.
-<img width="899" height="599" alt="image" src="https://github.com/user-attachments/assets/05f95b5d-bc93-4e1b-bb16-9ddaeddf0c39" />
-
-
-💼 Business Recommendations
-
-Run promotions on weekdays for maximum ROI
-
-Plan inventory and staffing around Q4 surge
-
-Reduce marketing budget on weekends (low conversion)
-
-Build A/B tests on promotion timing
-
-Integrate additional variables (holidays, competitor campaigns) for next model iteration
-
-📎 How to Run the Code
+## 📎 How to Run
 
 Clone the repository:
 
-git clone https://github.com/MLAlchemy-cmd/Regression_study
+```bash
+git clone https://github.com/MLAlchemy-cmd/A-Time-Series-Regression-Approach-to-Promotion-Optimization.git
+```
 
+**Step 1 — Python preprocessing**
 
-Open the R scripts in RStudio.
+Open the Jupyter notebook and run the data-cleaning and feature-engineering pipeline to generate `uk_daily_features.csv`.
 
-Install required packages:
+**Step 2 — R modeling**
 
-install.packages(c("forecast", "ggplot2", "tseries", "dplyr", "broom", "gridExtra"))
+Install the required packages:
 
+```r
+install.packages(c(
+  "forecast",
+  "ggplot2",
+  "tseries",
+  "dplyr",
+  "broom",
+  "gridExtra"
+))
+```
 
-Run the analysis scripts sequentially to reproduce:
+Open `regression_study_r_code.R`, update the dataset path, and run the regression and forecasting analyses.
 
-Data cleaning
+## ⚠️ Limitations & Future Work
 
-GLM modeling
+- The high-revenue-day indicator is calculated from observed revenue and should not be interpreted as an actual promotion variable.
+- Using that indicator during forecasting introduces information unavailable at prediction time.
+- Residual autocorrelation suggests the model does not fully capture the time-series structure.
+- Forecast accuracy decreases during extreme revenue fluctuations.
 
-Stationarity tests
+**Future improvements:** Incorporate verified promotional campaign data, holiday indicators, rolling-origin validation, and alternative forecasting models.
 
-SARIMAX forecasting
+## 🎓 Project Context
 
-Visualization
-<img width="1155" height="676" alt="image" src="https://github.com/user-attachments/assets/48151ee5-86b3-44c9-b2ff-d46c5eb2dbfd" />
-<img width="1182" height="796" alt="image" src="https://github.com/user-attachments/assets/b7198811-f7dd-4241-a6e1-99547cbbede5" />
+Developed to demonstrate statistical modeling, time-series forecasting, model diagnostics, and business-oriented data interpretation using real-world retail transactions.
 
-<img width="636" height="406" alt="image" src="https://github.com/user-attachments/assets/4aeea625-ebde-44c6-b648-05ed9d19921c" />
-<img width="638" height="369" alt="image" src="https://github.com/user-attachments/assets/de56713e-0cc8-43ee-9159-3c3caa336ac7" />
+## 👩‍💻 Author
 
+**Sahitya Avadhanam**  
+M.S. Data Science | University of Minnesota, Twin Cities
 
-
-
+[GitHub Profile](https://github.com/MLAlchemy-cmd)
