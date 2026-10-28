@@ -13,6 +13,8 @@ Measure weekday vs. weekend purchasing behavior
 Build a 90-day SARIMAX forecasting model with exogenous variables
 
 The analysis is built using R, leveraging GLM, SARIMAX, and standard forecasting tools.
+<img width="728" height="773" alt="image" src="https://github.com/user-attachments/assets/a3a1b240-8080-4497-bef8-d8deed555b51" />
+
 
 **🧠 Key Insights**
 
@@ -103,6 +105,8 @@ Revenue is highly seasonal with clear weekly patterns.
 SARIMAX is useful for planning but not perfect for extreme spikes.
 
 Combining GLM (interpretability) and SARIMAX (forecasting) gives the best full-picture view.
+<img width="899" height="599" alt="image" src="https://github.com/user-attachments/assets/05f95b5d-bc93-4e1b-bb16-9ddaeddf0c39" />
+
 
 💼 Business Recommendations
 
@@ -141,3 +145,12 @@ Stationarity tests
 SARIMAX forecasting
 
 Visualization
+<img width="1155" height="676" alt="image" src="https://github.com/user-attachments/assets/48151ee5-86b3-44c9-b2ff-d46c5eb2dbfd" />
+<img width="1182" height="796" alt="image" src="https://github.com/user-attachments/assets/b7198811-f7dd-4241-a6e1-99547cbbede5" />
+
+<img width="636" height="406" alt="image" src="https://github.com/user-attachments/assets/4aeea625-ebde-44c6-b648-05ed9d19921c" />
+<img width="638" height="369" alt="image" src="https://github.com/user-attachments/assets/de56713e-0cc8-43ee-9159-3c3caa336ac7" />
+
+
+
+
